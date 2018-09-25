@@ -11,32 +11,27 @@ WIN_COMBINATIONS = [
 ]
 
 def won?(board)
-end
-
-def full?(board)
-  board.all? do |index|
-    if board.index == "X" || board.index == "O"
-      if !draw?(board)
-        return TRUE
-      end
-    end
+  WIN_COMBINATIONS.detect do |combo|
+    board[combo[0]] == board[combo[1]] &&
+    board[combo[1]] == board[combo[2]] &&
+    position_taken?(board, combo[0])
   end
 end
 
-def draw?(board)
-  
+def full?(board)
+  board.all?{|token| token == "X" || token == "O"}
 end
 
-def over?
+def draw?(board)
+  full?(board) && !won?(board)
+end
+
+def over?(board)
+  won?(board) || full?(board)
 end
 
 def winner(board)
-  winner_icon = ""
-  WIN_COMBINATIONS.each do |index|
-    if WIN_COMBINATIONS.index.all == 'X'
-      winner_icon = "X"
-    elsif WIN_COMBINATIONS.index.all == 'O'
-      winner_icon = "O"
-    end
+  if winning_combo = won?(board)
+    board[winning_combo.first]
   end
 end
