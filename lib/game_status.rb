@@ -10,7 +10,7 @@ WIN_COMBINATIONS = [
   [0,4,8], [2,4,6] #Diagonal wins
 ]
 
-def won?
+def won?(board)
 end
 
 def full?(board)
